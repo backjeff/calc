@@ -1,0 +1,142 @@
+/**
+ * Jacoco configs
+ */
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+def modules = ["app"]
+def isAppModule = buildDir.toString().contains("app")
+
+task jacocoTestReport(type: JacocoReport, dependsOn: getJacocoDependsOn(isAppModule, modules)) {
+    description = "Generate Jacoco code coverage report"
+    group = "jacoco"
+
+    reports {
+        xml {
+            enabled true
+            destination file("${buildDir}/reports/jacoco/xml/jacocoTestReport.xml")
+        }
+        html {
+            enabled true
+            destination file("${buildDir}/reports/jacoco")
+        }
+    }
+    // Change as needed
+    def fileFilter = [
+            '**/*App.*',
+            '**/core/**/*.*',
+            '**/di/**/*.*',
+            '**/*Fragment.*',
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+            '**/*$*',
+    ]
+
+    sourceDirectories.from = getSourceDirectories(isAppModule, modules)
+    classDirectories.from = getClassDirectories(isAppModule, fileFilter, modules)
+    executionData.from = getExecutionData(isAppModule, modules)
+}
+
+task runJacocoTestReportAndOpen(dependsOn: getRunUnitTestsAndOpenJacocoReportOn(isAppModule, modules)) {
+    description = "Run task to generate Jacoco code coverage report and open in the browser"
+    group = "jacoco"
+
+    doLast {
+        def file = file("${buildDir}/reports/jacoco/index.html")
+        openInBrowse file
+    }
+}
+
+
+/**
+ * Get the gradle tasks dependencies for specific scope (app or library)
+ */
+static def getJacocoDependsOn(isAppModule, modules) {
+    String unitTestTask = 'testDebugUnitTest'
+    List<String> dependencies = []
+
+    if (isAppModule) {
+        modules.each {
+            if (it == "app") {
+                dependencies.add(":$it:$unitTestTask")
+            } else {
+                dependencies.add(":$it:testDebugUnitTest")
+            }
+        }
+    }
+
+    return dependencies
+}
+
+/**
+ * Get the source files to be considered for specific scope (app or library)
+ */
+def getSourceDirectories(isAppModule, modules) {
+    List<String> result = []
+    if (isAppModule) {
+        modules.each {
+            result.add("$project.rootDir/$it/src/main/java")
+        }
+    }
+    return files(result)
+}
+
+/**
+ * Get the classes to be considered for specific scope (app or library)
+ */
+def getClassDirectories(isAppModule, fileFilter, modules) {
+    List<FileTree> result = [fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)]
+    result.add(fileTree(dir: "$buildDir/build/tmp/kotlin-classes/debugUnitTest", excludes: fileFilter))
+
+    if (isAppModule) {
+        modules.each {
+            if (it != "app") {
+                result.add(fileTree(dir: "$project.rootDir/$it/build/tmp/kotlin-classes/debug", excludes: fileFilter))
+            }
+        }
+    }
+    return files(result)
+}
+
+/**
+ * Get the execution data files to be considered for specific scope (app or library)
+ */
+def getExecutionData(isAppModule, modules) {
+    String rootDir = (isAppModule) ? project.rootDir : project.buildDir
+    String baseUrl = (isAppModule) ? "app/build/" : ""
+    List<String> includes = [
+            "${baseUrl}jacoco/testDebugUnitTest.exec",
+            "${baseUrl}outputs/code-coverage/connected/*coverage.ec"]
+
+    if (isAppModule) {
+        modules.each {
+            if (it != "app") {
+                includes.add("$it/build/jacoco/testDebugUnitTest.exec")
+            }
+        }
+    }
+
+    return fileTree(dir: rootDir, include: includes)
+}
+
+/**
+ * Get the gradle tasks dependencies for specific scope (app or library)
+ */
+static def getRunUnitTestsAndOpenJacocoReportOn(isAppModule, modules) {
+    String jacocoTask = 'jacocoTestReport'
+    List<String> dependencies = [jacocoTask]
+    if (isAppModule) {
+        modules.each {
+            dependencies.add(":$it:$jacocoTask")
+        }
+    }
+
+    return dependencies
+}

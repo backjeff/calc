@@ -1,0 +1,17 @@
+ext {
+
+    /**
+     * Open the URL passed as a parameter in the standard browser
+     */
+    openInBrowse = { path ->
+        def os = org.gradle.internal.os.OperatingSystem.current()
+        if (os.isWindows()) {
+            exec { commandLine 'cmd', '/c', "start $path" }
+        } else if (os.isMacOsX()) {
+            exec { commandLine 'open', "$path" }
+        } else {
+            exec { commandLine 'google-chrome', "$path" }
+        }
+    }
+
+}
