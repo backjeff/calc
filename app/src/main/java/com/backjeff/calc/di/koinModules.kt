@@ -18,7 +18,6 @@ val module = module {
 
     factory {
         Calculator()
-//        Calculator(get(), get(), get(), get())
     }
 
     viewModel<MainActivityViewModel> {
