@@ -1,4 +1,4 @@
-package com.backjeff.calculator.core
+package com.backjeff.calc.core
 
 import android.app.Application
 

@@ -19,8 +19,8 @@ class MainActivityViewModelImplTest {
     private lateinit var application: Application
     private lateinit var calculator: Calculator
 
-    /*@Test
-    fun `sum`() {
+    @Test
+    fun sum() {
         // GIVEN
         val viewModel = getViewModel()
         val a = "10"
@@ -37,7 +37,7 @@ class MainActivityViewModelImplTest {
     }
 
     @Test
-    fun `subtraction`() {
+    fun subtraction() {
         // GIVEN
         val viewModel = getViewModel()
         val a = "10"
@@ -54,7 +54,7 @@ class MainActivityViewModelImplTest {
     }
 
     @Test
-    fun `multiplication`() {
+    fun multiplication() {
         // GIVEN
         val viewModel = getViewModel()
         val a = "10"
@@ -71,7 +71,7 @@ class MainActivityViewModelImplTest {
     }
 
     @Test
-    fun `division`() {
+    fun division() {
         // GIVEN
         val viewModel = getViewModel()
         val a = "10"
@@ -91,5 +91,5 @@ class MainActivityViewModelImplTest {
         application = mockk(relaxed = true)
         calculator = mockk(relaxed = true)
         return MainActivityViewModelImpl(application, calculator)
-    }*/
+    }
 }

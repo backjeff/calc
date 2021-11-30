@@ -17,8 +17,12 @@ val module = module {
     single { Division() }
 
     factory {
-        Calculator()
-//        Calculator(get(), get(), get(), get())
+        Calculator(
+            sum = get(),
+            subtraction = get(),
+            multiplication = get(),
+            division = get()
+        )
     }
 
     viewModel<MainActivityViewModel> {

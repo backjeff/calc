@@ -13,7 +13,7 @@ internal class CalculatorTest {
     private lateinit var multiplication: Multiplication
     private lateinit var division: Division
 
-    /*@Test
+    @Test
     fun `sum MUST call Sum execute`() {
         // GIVEN
         val calculator: Calculator = getCalculator()
@@ -92,5 +92,5 @@ internal class CalculatorTest {
             multiplication = multiplication,
             division = division,
         )
-    }*/
+    }
 }

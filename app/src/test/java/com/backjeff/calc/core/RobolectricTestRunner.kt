@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import com.backjeff.calc.di.module
-import com.backjeff.calculator.core.RobolectricTestApplication
 import io.mockk.unmockkAll
 import org.junit.After
 import org.junit.Before
@@ -31,7 +30,7 @@ abstract class RobolectricTestRunner : KoinTest {
 
     private lateinit var activityController: ActivityController<Activity>
 
-    internal lateinit var activity: Activity
+    private lateinit var activity: Activity
 
     open fun onSetup() {}
 

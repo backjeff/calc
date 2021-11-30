@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 internal class MultiplicationTest {
-    /*@Test
+    @Test
     fun `execute MUST multiply and return the result`() {
         // GIVEN
         val multiplication = Multiplication()
@@ -14,5 +14,5 @@ internal class MultiplicationTest {
 
         // THEN
         result shouldBe 50
-    }*/
+    }
 }

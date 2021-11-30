@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 internal class SumTest {
-    /*@Test
+    @Test
     fun `execute MUST sum and return the result 15`() {
         // GIVEN
         val sum = Sum()
@@ -26,5 +26,5 @@ internal class SumTest {
 
         // THEN
         result shouldBe 10
-    }*/
+    }
 }
