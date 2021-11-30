@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 internal class SubtractionTest {
-    /*@Test
+    @Test
     fun `execute MUST subtract and return the result`() {
         // GIVEN
         val subtraction = Subtraction()
@@ -14,5 +14,5 @@ internal class SubtractionTest {
 
         // THEN
         result shouldBe 5
-    }*/
+    }
 }
