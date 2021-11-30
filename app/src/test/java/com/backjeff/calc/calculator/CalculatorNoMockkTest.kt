@@ -22,10 +22,10 @@ internal class CalculatorNoMockkTest {
         stopKoin()
     }
 
-    /*@Test
+    @Test
     fun `sum MUST call Sum execute`() {
         // GIVEN
-        val calculator: Calculator = Calculator()
+        val calculator = Calculator()
         val a = 10
         val b = 5
         val expectedResult = 15
@@ -40,7 +40,7 @@ internal class CalculatorNoMockkTest {
     @Test
     fun `subtract MUST call Subtraction execute`() {
         // GIVEN
-        val calculator: Calculator = Calculator()
+        val calculator = Calculator()
         val a = 10
         val b = 5
         val expectedResult = 5
@@ -55,7 +55,7 @@ internal class CalculatorNoMockkTest {
     @Test
     fun `multiply MUST call Multiplication execute`() {
         // GIVEN
-        val calculator: Calculator = Calculator()
+        val calculator = Calculator()
         val a = 10
         val b = 5
         val expectedResult = 50
@@ -70,7 +70,7 @@ internal class CalculatorNoMockkTest {
     @Test
     fun `divide MUST call Division execute`() {
         // GIVEN
-        val calculator: Calculator = Calculator()
+        val calculator = Calculator()
         val a = 10
         val b = 5
         val expectedResult = 2
@@ -80,5 +80,5 @@ internal class CalculatorNoMockkTest {
 
         // THEN
         result shouldBe expectedResult
-    }*/
+    }
 }
